@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getFilters } from '../actions'
 
 const StyleFilters = style.div`
+display:none;
 float:left;
 background:#444;
 color:white;
@@ -20,6 +21,10 @@ padding:30px;
         font-size:1.2rem;
         height:2rem;
     }
+    @media(min-width:576px){
+        display:block;
+    }
+
 `
 
 

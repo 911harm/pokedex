@@ -8,6 +8,9 @@ export const reducer = (state = initialState, action) => {
     case "SET_POKEMONS": {
       return { ...state, pokemons: action.payload }
     }
+    case "SET_SEARCH_BY_TEXT": {
+      return { ...state, pokemons_show: action.payload, searchString:action.searchString}
+    }
     case "GET_TYPES": {
       return { ...state, types: action.payload }
     }

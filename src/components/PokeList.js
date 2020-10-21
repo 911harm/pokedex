@@ -13,11 +13,20 @@ margin:auto;
         display:grid;
         list-style-type: none;
         grid-auto-flow: dense;
+        grid-template:  "1fr 1fr " 33.33vh
+                        "1fr 1fr " 33.33vh
+                        "1fr 1fr " 33.33vh;
+        grid-gap: 2px;
+        overflow:auto;
+    }
+    @media(min-width:576px){
+        
+        ul{
         grid-template:  "1fr 1fr 1fr " 33.33vh
                         "1fr 1fr 1fr " 33.33vh
                         "1fr 1fr 1fr " 33.33vh;
-        grid-gap: 6px;
-        overflow:auto
+        grid-gap: 3px;
+    }
     }
 
     
@@ -26,19 +35,27 @@ margin:auto;
 
 export default function PokeList() {
     const dispatch = useDispatch()
-    let { pokemons } = useSelector(state => state)
+
+
+    let { pokemons, pokemons_show, searchString } = useSelector(state => state)
+    if (searchString && pokemons_show) {
+        pokemons = pokemons_show
+    }
+        
+    
+
+
     useEffect(() => {
-         let localPokemons = JSON.parse(localStorage.getItem("pokemons"))||[]
+        let localPokemons = JSON.parse(localStorage.getItem("pokemons")) || []
 
         if (localPokemons.length === 0) {
             dispatch(getPokemons())
             console.log("Traer pokemons de la API")
-        }else{
+        } else {
             dispatch(setPokemons(localPokemons))
             console.log("Traer pokemons del localStorage")
         }
-           
-        
+
     }, [dispatch])
     return (
         <StylePokeList>
@@ -57,8 +74,9 @@ export default function PokeList() {
                                 </div>
                             </div>
                         </li>
-                    )}
+                    ).slice(0, 10)}
             </ul>
+            <button>Cargar más</button>
         </StylePokeList>
     )
 }

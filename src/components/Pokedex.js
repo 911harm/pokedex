@@ -1,23 +1,34 @@
 import React from 'react'
 import style from 'styled-components'
 import PokeList from './PokeList'
-
-const StylePokedex=style.div`
+import { useSelector } from 'react-redux'
+const StylePokedex = style.div`
 float:left;
 background:#444;
 color:white;
 height:100vh;
-width:60%;
-margin-left:30px;
+width:100%;
+margin:auto;
 // padding:10px;
+    @media(min-width:576px){
+         margin-left:30px;
+         width:60%;
+    }
 
 `
 
 
 export default function Pokedex() {
+    const { pokemons_show = [], searchString = "" } = useSelector(state => state)
+
     return (
         <StylePokedex>
-            <PokeList></PokeList>
+            {(searchString.length > 0 && pokemons_show.length === 0) ?
+                (<h2>No hay Resultados para tu busqueda</h2>) :
+                (<PokeList></PokeList>)
+
+            }
+
         </StylePokedex>
     )
 }
