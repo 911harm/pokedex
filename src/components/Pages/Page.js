@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import Search from '../Search';
 import Filters from '../Filters';
 import style from 'styled-components'
+import Pokedex from '../Pokedex';
 
 const StyleHead = style.div`
 width:80%;
@@ -41,6 +42,7 @@ export default function Page() {
             </StyleHead>
             <hr />
             <Filters></Filters>
+            <Pokedex></Pokedex>
         </React.Fragment>
 
     )

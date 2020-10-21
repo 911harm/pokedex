@@ -1,19 +1,23 @@
 import React from 'react'
 import style from 'styled-components'
+import PokeList from './PokeList'
 
-const StyleSearch=style.input`
+const StylePokedex=style.div`
+float:left;
 background:#444;
 color:white;
-height:20px;
-width:30%;
-margin:10px;
-padding:10px;
+height:100vh;
+width:60%;
+margin-left:30px;
+// padding:10px;
 
 `
 
 
 export default function Pokedex() {
     return (
-        
+        <StylePokedex>
+            <PokeList></PokeList>
+        </StylePokedex>
     )
 }

@@ -4,19 +4,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getFilters } from '../actions'
 
 const StyleFilters = style.div`
+float:left;
 background:#444;
 color:white;
 height:100%;
 width:25%;
 margin:10px;
 padding:30px;
-border:1px solid red;
     .check{
-        // background:red;
-        // border:1px solid;
         display:inline-block;
         margin:5px;
         font-size:1.2rem;
+    }
+    .gender{
+        font-size:1.2rem;
+        height:2rem;
     }
 `
 
@@ -26,7 +28,7 @@ export default function Filters() {
     const { types, colors, genders } = useSelector(state => state)
     useEffect(() => {
         dispatch(getFilters())
-    }, [])
+    }, [dispatch])
     return (
 
         <StyleFilters placeholder="Pokemon">
@@ -63,9 +65,9 @@ export default function Filters() {
                 {genders &&
                     genders.map(gender => {
                         return (
-                            <div className="check" key={gender.name}>
+                            <div className="gender" key={gender.name}>
                                 <input type="radio" id='gender' name='gender' value={gender.name}/>
-                                <label htmlFor='gender'>{gender.name}</label><br/>
+                                <label htmlFor='gender'>{gender.name}</label>
                             </div>
                         )
                     }
