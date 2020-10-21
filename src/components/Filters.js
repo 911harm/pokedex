@@ -30,7 +30,10 @@ padding:30px;
 
 export default function Filters() {
     const dispatch = useDispatch()
-    const { types, colors, genders } = useSelector(state => state)
+    const onGender=(e)=>{
+        dispatch({type:"SET_FILTER_GENDER",payload:e.target.value})
+    }
+    const { types, colors, genders, types_selected, colors_selected } = useSelector(state => state)
     useEffect(() => {
         dispatch(getFilters())
     }, [dispatch])
@@ -40,11 +43,18 @@ export default function Filters() {
             <div>
                 <h2>Type</h2>
                 {types &&
-                    types.map(type => {
+                    types.map((type, i) => {
                         return (
                             <div className="check" key={type.name}>
                                 <label htmlFor={type.name}>{type.name}</label>
-                                <input type="checkbox" name={type.name} />
+                                <input type="checkbox" onChange={() => {
+                                    let x = types_selected.findIndex(t => i + 1 === t)
+                                    if (x >= 0) {
+                                        dispatch({ type: "DEL_FILTER_TYPE", tipo_name: type.name, payload: x })
+                                    } else {
+                                        dispatch({ type: "SET_FILTER_TYPE", tipo_name: type.name, payload: i + 1 })
+                                    }
+                                }} name="gender" />
                             </div>
                         )
                     }
@@ -54,11 +64,18 @@ export default function Filters() {
                 <hr />
                 <h2>Color:</h2>
                 {colors &&
-                    colors.map(type => {
+                    colors.map((type, i) => {
                         return (
                             <div className="check" key={type.name}>
                                 <label htmlFor={type.name}>{type.name}</label>
-                                <input type="checkbox" name={type.name} />
+                                <input type="checkbox" onChange={() => {
+                                    let x = colors_selected.findIndex(t => i + 1 === t)
+                                    if (x >= 0) {
+                                        dispatch({ type: "DEL_FILTER_COLOR", tipo_name: type.name, payload: x })
+                                    } else {
+                                        dispatch({ type: "SET_FILTER_COLOR", tipo_name: type.name, payload: i + 1 })
+                                    }
+                                }} name={type.name} />
                             </div>
                         )
                     }
@@ -71,7 +88,7 @@ export default function Filters() {
                     genders.map(gender => {
                         return (
                             <div className="gender" key={gender.name}>
-                                <input type="radio" id='gender' name='gender' value={gender.name}/>
+                                <input type="radio" id='gender' name='gender' onChange={onGender} value={gender.name} />
                                 <label htmlFor='gender'>{gender.name}</label>
                             </div>
                         )
@@ -81,5 +98,5 @@ export default function Filters() {
                 }
             </div>
         </StyleFilters>
-                        )
-                    }
+    )
+}

@@ -43,8 +43,6 @@ export default function PokeList() {
     }
         
     
-
-
     useEffect(() => {
         let localPokemons = JSON.parse(localStorage.getItem("pokemons")) || []
 
@@ -57,6 +55,8 @@ export default function PokeList() {
         }
 
     }, [dispatch])
+
+
     return (
         <StylePokeList>
             <ul>
