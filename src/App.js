@@ -15,13 +15,13 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route exact path="" component={Page}></Route>
           <Route exact path="/" component={Page}></Route>
-          <Route exact path="/pokemon:id?" component={Details}></Route>
+          <Route exact path="/pokemon/:id?" component={Details}></Route>
+          <Route exact path="" component={Page}></Route>
         </Switch>
       </Router>
     </Provider>
   );
 }
-store.subscribe(() => console.log(store.getState()))
+// store.subscribe(() => console.log(store.getState()))
 export default App;

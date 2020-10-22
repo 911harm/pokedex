@@ -19,13 +19,17 @@ export default function Search() {
     const dispath = useDispatch();
     const setSearch = (e) => {
         let searchString = e.target.value
-        let filtrado = pokemons.filter(a => a.pokemon_species.name.toLowerCase().includes(searchString.toLowerCase()))
-
-        dispath({ type: "SET_SEARCH_BY_TEXT", searchString, payload: filtrado })
+        if (parseInt(searchString)) {
+            let filtrado = pokemons.filter(a => a.entry_number.toString().includes(parseInt(searchString)))
+            dispath({ type: "SET_SEARCH_BY_TEXT", searchString, payload: filtrado })
+        } else {
+            let filtrado = pokemons.filter(a => a.pokemon_species.name.toLowerCase().includes(searchString.toLowerCase()))
+            dispath({ type: "SET_SEARCH_BY_TEXT", searchString, payload: filtrado })
+        }
     }
     return (
 
-        <StyleSearch placeholder="Pokemon" onChange={setSearch}>
+        <StyleSearch placeholder="Pokemon ID or Name" onChange={setSearch}>
 
         </StyleSearch>
     )

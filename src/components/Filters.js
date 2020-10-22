@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import style from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getFilters } from '../actions'
+import { getFilters, refreshF } from '../actions'
 
 const StyleFilters = style.div`
 display:none;
@@ -29,11 +29,15 @@ padding:30px;
 
 
 export default function Filters() {
-    const dispatch = useDispatch()
-    const onGender=(e)=>{
-        dispatch({type:"SET_FILTER_GENDER",payload:e.target.value})
-    }
     const { types, colors, genders, types_selected, colors_selected } = useSelector(state => state)
+    const dispatch = useDispatch()
+
+
+    const onGender = (e) => {
+        dispatch({ type: "SET_FILTER_GENDER", payload: e.target.value })
+    }
+
+
     useEffect(() => {
         dispatch(getFilters())
     }, [dispatch])
@@ -54,6 +58,7 @@ export default function Filters() {
                                     } else {
                                         dispatch({ type: "SET_FILTER_TYPE", tipo_name: type.name, payload: i + 1 })
                                     }
+                                    dispatch(refreshF(types_selected))
                                 }} name="gender" />
                             </div>
                         )
@@ -85,10 +90,10 @@ export default function Filters() {
                 <hr />
                 <h2>Gender:</h2>
                 {genders &&
-                    genders.map(gender => {
+                    genders.map((gender, i) => {
                         return (
                             <div className="gender" key={gender.name}>
-                                <input type="radio" id='gender' name='gender' onChange={onGender} value={gender.name} />
+                                <input type="radio" id='gender' name='gender' onChange={onGender} value={i + 1} />
                                 <label htmlFor='gender'>{gender.name}</label>
                             </div>
                         )
