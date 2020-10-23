@@ -9,7 +9,7 @@ color:white;
 height:100vh;
 width:100%;
 margin:auto;
-// padding:10px;
+padding:10px;
     @media(min-width:576px){
          margin-left:30px;
          width:60%;
@@ -25,6 +25,7 @@ export default function Pokedex() {
         <StylePokedex>
             {(searchString.length > 0 && pokemons_show.length === 0) ?
                 (<h2>No hay Resultados para tu busqueda</h2>) :
+                // (<PokeList2></PokeList2>)
                 (<PokeList></PokeList>)
 
             }

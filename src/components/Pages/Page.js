@@ -10,7 +10,7 @@ width:80%;
 display:flex;
 justify-content: space-between;
 align-items: center;
-margin:30px auto;
+margin:40px auto;
     .logo{
         width: 70px;
     }

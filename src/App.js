@@ -5,6 +5,7 @@ import { store } from './store'
 
 //Por ahora dejare el Router y las Routes aqui (son 2 :/)
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+//Hice modal por la otra ruta :/
 
 //import de components
 import Page from './components/Pages/Page';

@@ -21,12 +21,13 @@ padding:30px;
         font-size:1.2rem;
         height:2rem;
     }
-    @media(min-width:576px){
+    @media(min-width:800px){
         display:block;
     }
 
 `
-
+//matchs de filters :/
+//no time
 
 export default function Filters() {
     const { types, colors, genders, types_selected, colors_selected } = useSelector(state => state)

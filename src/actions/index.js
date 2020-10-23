@@ -43,7 +43,7 @@ export const refreshF = (TYPEs) => {
   return dispatch => {
     return axios.get(url + 'type/1').then(res => {
       dispatch({ type: "FILTERED", payload: res.data.pokemon })
-      console.log(res.data.pokemon)
+      // console.log(res.data.pokemon)
     })
   }
 }
