@@ -37,7 +37,7 @@ export default function Page() {
     return (
         <React.Fragment>
             <StyleHead>
-                <a href="https://github.com/911harm"><img className="logo" src="https://www.freepngimg.com/thumb/github/1-2-github-free-png-image.png" alt="911harm" /></a>
+                <a href="https://github.com/911harm/pokedex"><img className="logo" src="https://www.freepngimg.com/thumb/github/1-2-github-free-png-image.png" alt="911harm" /></a>
                 <Search>{state}</Search>
             </StyleHead>
             <hr />

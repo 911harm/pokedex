@@ -136,7 +136,7 @@ export default function PokeList() {
             ? <img className="Poke-img" src={Pokes.sprites.front_default} alt={Pokes.name} />
             : <p>Loading...</p>
           }
-          {Pokes2.name &&
+          {Pokes2.name && Pokes.name &&
             <div className="Poke-info">
 
               <h3>{capitalizeFirstLetter(Pokes.name)}  ({Pokes.id}) </h3>
