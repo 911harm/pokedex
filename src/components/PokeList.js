@@ -15,25 +15,43 @@ color:white;
 height:100vh;
 width:90%;
 margin:auto;
+padding-inline-start
+
+  .container-bk{
+      text-align: center;
+  }
+  
+ 
     ul{
         display:grid;
         list-style-type: none;
         grid-auto-flow: dense;
-        grid-template:  "1fr 1fr " 33.33vh
-                        "1fr 1fr " 33.33vh
-                        "1fr 1fr " 33.33vh;
+        grid-template:  "1fr 1fr " 20.33vh
+                        "1fr 1fr " 20.33vh
+                        "1fr 1fr " 20.33vh;
         grid-gap: 2px;
         overflow:auto;
+        .container-bk{
+          img{
+            width:40%;
+          }
+    }
     }
     @media(min-width:576px){
         
         ul{
-        grid-template:  "1fr 1fr 1fr " 33.33vh
-                        "1fr 1fr 1fr " 33.33vh
-                        "1fr 1fr 1fr " 33.33vh;
+        grid-template:  "1fr 1fr 1fr " 25.33vh
+                        "1fr 1fr 1fr " 25.33vh
+                        "1fr 1fr 1fr " 25.33vh;
         grid-gap: 3px;
+      .pokemon-container{
+        display:block;
+        // background:red;
+        height:100%;
+      }
     }
     }
+    
 
     
 `
@@ -48,7 +66,7 @@ export default function PokeList() {
   const dispatch = useDispatch()
   const [ChargeN, setChargeN] = useState(20)
   const [showButtom, setShowButtom] = useState(true)
-  let { pokemons, pokemons_show, searchString } = useSelector(state => state)
+  let { pokemons, pokemons_show } = useSelector(state => state)
 
 
   //Modal const
@@ -75,8 +93,12 @@ export default function PokeList() {
   }
 
   //if Search
-  if (searchString && pokemons_show) {
+  // if (searchString && pokemons_show) {
+  //   pokemons = pokemons_show
+  // }
+  if (pokemons_show.length > 0) {
     pokemons = pokemons_show
+    // console.log(pokemons)
   }
   //..
 
@@ -102,16 +124,20 @@ export default function PokeList() {
     }
   }
   //..
+  const fnumber = (n) => (n.toString().padStart(3, 0))
   return (
     <StylePokeList>
       <ul>
         {pokemons &&
-          pokemons.map(pokemon =>
-            <li className="pokemon-container" key={pokemon.entry_number}>
+          pokemons.map(pokemon => {
+            if (pokemon === undefined) {
+              return null
+            }else{
+            return <li className="pokemon-container" key={pokemon.entry_number}>
               <div>
                 <div className="container-bk">
                   <a href={"#" + pokemon.entry_number} onClick={() => openModal(pokemon.entry_number)}>
-                    <img loading="lazy" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.entry_number}.png`} alt={pokemon.pokemon_species.name} />
+                    <img loading="lazy" src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${fnumber(pokemon.entry_number)}.png`} alt={pokemon.pokemon_species.name} />
                   </a>
                   <div className="poke-inf" >
                     <h5>{capitalizeFirstLetter(pokemon.pokemon_species.name)}</h5>
@@ -119,7 +145,11 @@ export default function PokeList() {
                 </div>
               </div>
             </li>
-          ).slice(0, ChargeN)}
+
+            }
+
+
+          }).slice(0, ChargeN)}
       </ul>
       {showButtom
         ? <button onClick={chargeMore}>Load more...</button>
@@ -132,8 +162,9 @@ export default function PokeList() {
       >
 
         <StyleModal>
-          {Pokes.name
-            ? <img className="Poke-img" src={Pokes.sprites.front_default} alt={Pokes.name} />
+          {Pokes.name && Pokes.name
+            ? <img className="Poke-img" src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${fnumber(Pokes.id)}.png`} alt={Pokes.name} />
+            // ? <img className="Poke-img" src={Pokes.sprites.front_default} alt={Pokes.name} />
             : <p>Loading...</p>
           }
           {Pokes2.name && Pokes.name &&
@@ -158,7 +189,7 @@ export default function PokeList() {
                     <td>{Pokes.types.map(t => t.type.name + " ")}</td>
                     {/* <td>{Pokes.types[0].type.name}</td> */}
                   </tr>
-                   
+
                   {/* <tr>
                     <th>Gender</th>
                     <td>{Pokes.height}</td> 
@@ -177,7 +208,7 @@ export default function PokeList() {
             </div>}
 
         </StyleModal>
-        <button style={{ padding: "8px" }} id="btn-back" onClick={closeModal}>Back</button>
+        <button style={{ padding: '6px' }} onClick={closeModal}>Back</button>
 
       </Modal>
     </StylePokeList>

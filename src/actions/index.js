@@ -41,9 +41,26 @@ export const getPokemons = () => {
 //REFRESH FILTRESS
 export const refreshF = (TYPEs) => {
   return dispatch => {
-    return axios.get(url + 'type/1').then(res => {
+    return axios.get(url + 'type/' + TYPEs).then(res => {
       dispatch({ type: "FILTERED", payload: res.data.pokemon })
       // console.log(res.data.pokemon)
     })
   }
 }
+export const refreshC = (Color) => {
+  return dispatch => {
+    return axios.get(url + 'pokemon-color/' + Color).then(res => {
+      dispatch({ type: "FILTEREDC", payload: res.data.pokemon_species })
+      // console.log(res.data.pokemon)
+    })
+  }
+}
+export const refreshG = (GenderID) => {
+  return dispatch => {
+    return axios.get(url + 'gender/' + GenderID).then(res => {
+      dispatch({ type: "FILTEREDG", payload: res.data.pokemon_species_details})
+      // console.log(res.data)
+    })
+  }
+}
+

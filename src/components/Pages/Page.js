@@ -29,7 +29,17 @@ margin:40px auto;
         }
     }
 }
-
+#btn-back{
+    background: red;
+    color: white;
+    border-radius: 35%;
+    padding: 10px;
+    transition:400ms all;
+    &:hover{
+      background: #444;
+      color: white;
+    }
+  }
 `
 
 export default function Page() {

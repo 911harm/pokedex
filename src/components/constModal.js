@@ -3,14 +3,9 @@ import style from 'styled-components'
 
 export const StyleModal = style.div`
 box-sizing:border-box;
-
 align-items: center;
-// background:#333;
-// color:white;
-// min-width:100%;
-// height:60vh;
 padding:20px;
-
+ 
   .Poke-img{
     margin: auto;
     padding:20px;
@@ -41,18 +36,17 @@ padding:20px;
       }
     
   }
-  #btn-back{
-    padding:10px;}
-    @media(min-width:576px){  
+  }
+    @media(min-width:1024px){  
       display:flex;
       font-size:1.5rem;
       .Poke-info{
         margin:10px 20px;
         }
-
   }
   
 `
+
 //for Modal Config
 export const customStyles = {
     content: {

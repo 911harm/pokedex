@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import style from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getFilters, refreshF } from '../actions'
+import { getFilters, refreshF, refreshC, refreshG } from '../actions'
 
 const StyleFilters = style.div`
 display:none;
@@ -36,6 +36,7 @@ export default function Filters() {
 
     const onGender = (e) => {
         dispatch({ type: "SET_FILTER_GENDER", payload: e.target.value })
+        dispatch(refreshG(e.target.value))
     }
 
 
@@ -58,8 +59,8 @@ export default function Filters() {
                                         dispatch({ type: "DEL_FILTER_TYPE", tipo_name: type.name, payload: x })
                                     } else {
                                         dispatch({ type: "SET_FILTER_TYPE", tipo_name: type.name, payload: i + 1 })
+                                        dispatch(refreshF(i + 1))
                                     }
-                                    dispatch(refreshF(types_selected))
                                 }} name="gender" />
                             </div>
                         )
@@ -80,6 +81,7 @@ export default function Filters() {
                                         dispatch({ type: "DEL_FILTER_COLOR", tipo_name: type.name, payload: x })
                                     } else {
                                         dispatch({ type: "SET_FILTER_COLOR", tipo_name: type.name, payload: i + 1 })
+                                        dispatch(refreshC(i + 1))
                                     }
                                 }} name={type.name} />
                             </div>

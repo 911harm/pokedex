@@ -10,9 +10,13 @@ height:100vh;
 width:100%;
 margin:auto;
 padding:10px;
-    @media(min-width:576px){
-         margin-left:30px;
-         width:60%;
+    // @media(min-width:576px){
+    //      margin-left:30px;
+    //      width:60%;
+    // }
+    @media(min-width:800px){
+        margin-top: 10px;
+        width: 61%;
     }
 
 `

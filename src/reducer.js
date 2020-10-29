@@ -1,4 +1,4 @@
-let initialState = { types_selected: [], colors_selected: [] }
+let initialState = { types_selected: [], colors_selected: [], pokemons_show: [], pokemons: [] }
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -31,22 +31,53 @@ export const reducer = (state = initialState, action) => {
       return { ...state, gender_selected: action.payload }
     }
     case "FILTERED": {
-      return { ...state, FILTRO: action.payload }
+      //(if) mix of filters
+     if(true){
+       let pokemons_filtereds =[]
+       action.payload.map( xvar =>pokemons_filtereds.push(state.pokemons.find(e =>{
+         return e.pokemon_species.name === xvar.pokemon.name
+         
+       })))
+       return{ ...state,pokemons_filtereds, pokemons_show:pokemons_filtereds }
+      }
+      break;
+    }
+    case "FILTEREDC": {
+     if(true){
+       let pokemons_filtereds =[]
+       action.payload.map( xvar =>pokemons_filtereds.push(state.pokemons.find(e =>{
+         return e.pokemon_species.name === xvar.name
+         
+       })))
+       return{ ...state,pokemons_filtereds, pokemons_show:pokemons_filtereds }
+     }
+     break;
+    }
+    case "FILTEREDG": {
+     if(true){
+       let pokemons_filtereds =[]
+       action.payload.map( xvar =>pokemons_filtereds.push(state.pokemons.find(e =>{
+         return e.pokemon_species.name === xvar.pokemon_species.name
+         
+       })))
+       return{ ...state,pokemons_filtereds, pokemons_show:pokemons_filtereds }
+     }
+     break;
     }
     case "GET_TYPES": {
-      return { ...state, types: action.payload }
-    }
+  return { ...state, types: action.payload }
+}
     case "GET_COLORS": {
-      return { ...state, colors: action.payload }
-    }
+  return { ...state, colors: action.payload }
+}
     case "GET_GENDERS": {
-      return { ...state, genders: action.payload }
-    }
+  return { ...state, genders: action.payload }
+}
 
 
     default: {
 
-      return state
-    }
+  return state
+}
   }
 }
